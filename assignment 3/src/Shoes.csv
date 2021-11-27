@@ -1,0 +1,101 @@
+brand,price,size,shoeType,color,shoeID
+Saucony,987.83,21,walking,Chocolate,1
+"Under Armour",1539.6,18,volleyball,DarkGray,2
+Avia,753.98,19,basketball,LightGray,3
+"New Balance",944.27,7,squash,SandyBrown,4
+Saucony,1242.03,13,running,LightBlue,5
+"New Balance",268.53,13,hiking,Bisque,6
+"Under Armour",551.39,18,squash,DarkOrange,7
+Puma,131.27,17,football,LightGreen,8
+"Under Armour",608.98,9,squash,SandyBrown,9
+Nike,821.5,5,volleyball,GhostWhite,10
+Avia,988.09,18,running,Yellow,11
+"Under Armour",106.7,6,hiking,LawnGreen,12
+Adidas,1779.36,21,volleyball,PaleGoldenRod,13
+Nfiniy,313.03,15,squash,SlateGray,14
+Nike,688.68,6,walking,Silver,15
+Puma,172.26,4,football,PowderBlue,16
+Nike,221.18,6,volleyball,MediumVioletRed,17
+Saucony,612.61,20,basketball,Chartreuse,18
+Nike,1930.36,10,basketball,Chocolate,19
+Saucony,1505.15,10,tennis,DarkSlateBlue,20
+"New Balance",1315.82,13,running,Lime,21
+Nfiniy,1286.45,17,walking,Thistle,22
+Puma,73.89,12,hiking,Lavender,23
+Adidas,403.01,7,running,DimGray,24
+"Air Jordan",470.8,6,tennis,LimeGreen,25
+Puma,1932.31,8,volleyball,Chocolate,26
+"Under Armour",446.72,18,walking,DarkGray,27
+Avia,992.78,8,hiking,Black,28
+Nfiniy,760.98,11,tennis,DarkSlateBlue,29
+Reebok,1459.81,18,hiking,Sienna,30
+Adidas,1004.93,16,tennis,LightYellow,31
+"New Balance",868.85,18,running,DarkOrange,32
+Nfiniy,1330.94,13,football,LightSalmon,33
+Nike,851.36,14,football,BlueViolet,34
+Nfiniy,1324.05,16,basketball,SkyBlue,35
+"New Balance",157.54,11,squash,Snow,36
+Puma,441.85,21,walking,CornflowerBlue,37
+"Under Armour",1996.78,6,hiking,Brown,38
+Nfiniy,904.5,4,squash,DarkRed,39
+Puma,486.89,13,running,DarkOliveGreen,40
+Avia,1813.32,20,volleyball,Linen,41
+Nfiniy,1338.9,9,running,Blue,42
+Nfiniy,1271.26,3,hiking,MistyRose,43
+Adidas,928.03,21,basketball,Peru,44
+Nike,1948.28,7,hiking,FloralWhite,45
+Saucony,1785.43,19,football,DeepPink,46
+Puma,1255.14,10,football,Snow,47
+Avia,263.08,18,volleyball,Coral,48
+Adidas,378.5,7,volleyball,Coral,49
+Avia,1222.63,9,hiking,LightSlateGray,50
+Avia,1115.75,9,volleyball,Crimson,51
+"Under Armour",1412.33,21,walking,Green,52
+Saucony,1765.98,10,tennis,LavenderBlush,53
+"Air Jordan",1628.12,22,running,HotPink,54
+Reebok,1162.77,10,walking,Red,55
+Nike,1354.82,15,volleyball,MediumBlue,56
+Saucony,1619.53,6,walking,PaleGreen,57
+Saucony,1766.64,15,football,White,58
+Reebok,934.12,3,tennis,GhostWhite,59
+Puma,498.17,16,football,MediumAquaMarine,60
+Adidas,1203.98,15,walking,Red,61
+Avia,1305.67,22,running,Cornsilk,62
+"Air Jordan",1370.48,7,tennis,Yellow,63
+Nfiniy,1768.14,22,walking,Cornsilk,64
+"Under Armour",103.69,4,tennis,Violet,65
+"Under Armour",1705.7,22,volleyball,GreenYellow,66
+"New Balance",1518.7,12,walking,DeepPink,67
+Nike,636.76,16,squash,Tomato,68
+Nfiniy,1772.87,9,football,Pink,69
+Reebok,933.92,10,basketball,Maroon,70
+Adidas,224.09,6,squash,DeepSkyBlue,71
+Saucony,662.74,3,running,Tomato,72
+Nfiniy,976.2,6,hiking,Orchid,73
+"New Balance",464.74,17,volleyball,Violet,74
+Nike,386.45,15,hiking,SlateGray,75
+"Under Armour",1309.39,16,squash,SteelBlue,76
+"Under Armour",1519.63,9,running,Orchid,77
+"Air Jordan",1424.63,19,basketball,Magenta,78
+"Under Armour",290.73,5,running,Gold,79
+Avia,963.23,13,volleyball,DeepSkyBlue,80
+Avia,105.14,7,basketball,Ivory,81
+"Air Jordan",267.04,4,tennis,Magenta,82
+"Under Armour",1733.18,3,football,Peru,83
+Saucony,750.88,13,volleyball,FireBrick,84
+Nfiniy,1341.87,5,basketball,Moccasin,85
+Adidas,104.41,17,squash,Green,86
+Puma,751.6,9,hiking,OldLace,87
+Adidas,1933.63,20,basketball,LightGoldenRodYellow,88
+Puma,1598.99,10,volleyball,MintCream,89
+Adidas,812.21,19,volleyball,FireBrick,90
+Saucony,834.41,20,walking,Moccasin,91
+Reebok,1518.78,4,football,SeaShell,92
+Adidas,633.78,9,tennis,Wheat,93
+Saucony,1052.77,15,volleyball,Cornsilk,94
+"Air Jordan",1960.03,3,basketball,LightGray,95
+Adidas,1568.76,8,basketball,HoneyDew,96
+Avia,1173.28,4,tennis,DarkMagenta,97
+Saucony,670.62,21,walking,Olive,98
+Adidas,1743.91,15,basketball,Green,99
+Nike,795.64,19,football,FireBrick,100
