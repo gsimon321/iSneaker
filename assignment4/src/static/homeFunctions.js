@@ -11,6 +11,17 @@ function getEmployee()
 }
 
 
+function logout()
+{
+    let xReq = new XMLHttpRequest(); // creating a new XML request.
+    xReq.onreadystatechange = display; 
+
+  
+    xReq.open('GET', `/logout`, true)  
+
+    xReq.send(); 
+
+}
 
 
 function order()

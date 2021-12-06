@@ -631,3 +631,9 @@ app.get("/itemsSold", (req, res)=>{
 
     
 })
+
+
+app.get('/logout',  (req, res)=>{
+
+    res.redirect("index.html")
+})
