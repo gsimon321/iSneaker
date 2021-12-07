@@ -262,5 +262,95 @@ function  items()
 }
 
 
+function showUpdate()
+{
+    let response = document.getElementById("response");
+    response.style.display = "block"
+
+    let display  = document.getElementById("confirm");
+    display.style.visibility = "hidden"
+
+
+    response.innerHTML= "<div style='margin-top:20px'> Customer Update Form Form </div>"
+    response.innerHTML+=`      <form action="javascript:getUpdateForm()" id="customerEmailForm" >
+
+                                    <p>
+                                    <label for="email"  >Customer Email: </label>
+                                    <input type="text" required id="email" value="andersonjeremy@hotmail.com"></input>
+                                    </p>
+                                    
+
+                                    <p>
+                                  
+                                    <input type="submit"></input>
+                                    </p>
+
+                                   
+                                
+                                </form>
+
+`
+
+
+    
+
+}
+
+function getUpdateForm()
+{
+   
+    let response  = document.getElementById("response");
+    response.style.display= "block"
+    let display  = document.getElementById("confirm");
+    display.style.visibility = "hidden"
+            
+    let customerEmailForm = document.getElementById("customerEmailForm").elements;
+   
+    let xReq = new XMLHttpRequest(); // creating a new XML request.
+    xReq.onreadystatechange = displayForm; 
+
+  
+    xReq.open('GET', `/customerInfo?email=${customerEmailForm[0].value}`, true)  
+
+    xReq.send(); 
+
+}
+
+
+function updateCustomer()
+{
+        
+    let customer = document.getElementById("updateCustomerForm").elements;
+
+    let customerObject={}
+
+    for(let i = 0; i<customer.length-1;i++)
+    {
+        customerObject[`${customer[i].id}`] = customer[i].value
+    }
+
+
+    let xReq = new XMLHttpRequest(); // creating a new XML request.
+    xReq.onreadystatechange = displayResponse; 
+
+  
+    xReq.open('GET', `/updateCustomer?customer=${JSON.stringify(customerObject)}`, true)  
+
+    xReq.send(); 
+
+}
+
+function displayForm()
+{
+    if(this.readyState==4 && this.status == 200)
+    {
+        let display  = document.getElementById("response");
+        display.style.visibility = "visible"
+        display.innerHTML=this.responseText;
+        
+        
+    }
+}
+
 
 getEmployee();

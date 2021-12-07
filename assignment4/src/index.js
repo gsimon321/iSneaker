@@ -376,14 +376,16 @@ app.get('/distance', (req, res)=>{
 app.get('/order', (req, res)=>{
 
 
-    let query= `CREATE OR REPLACE VIEW employeeOrders (employeeEmail, saleID, dateShipped, courierServer, customerEmail) AS
+    let query = `START TRANSACTION;
+    CREATE OR REPLACE VIEW employeeOrders (employeeEmail, saleID, dateShipped, courierServer, customerEmail) AS
     SELECT E.employeeEmail, O.saleID , O.dateShipped, O.courierServer, O.customerEmail
     FROM orders O
     JOIN sales E
     ON O.saleID = E.saleID
     WHERE O.saleID = E.saleID
-    GROUP BY O.saleID
-   `
+    GROUP BY O.saleID;
+    COMMIT;
+    SELECT  * FROM employeeorders`
 
     let  conn = newConnection();
 
@@ -404,8 +406,7 @@ app.get('/order', (req, res)=>{
     })
 
 
-
-         conn.query(query, (err, rows, fields)=>{
+         conn.query(query, (err, results, fields)=>{
 
              if(err)
                 console.log(err)
@@ -422,9 +423,12 @@ app.get('/order', (req, res)=>{
                 <th>Customer Email</th>
                 </tr>`
 
-                let query2 = 'SELECT  * FROM employeeorders'
 
-                conn.query(query2, (err, rows, fields)=>{
+                let rows = results[results.length-1]
+           
+        
+
+               
                     for(let i = 0; i<rows.length;i++)
                     {
         
@@ -444,32 +448,22 @@ app.get('/order', (req, res)=>{
                         
                     }
             
-                
-        
-                        content+="</table>"
+                 content+="</table>"
         
         
-                            res.send(content);
+                res.send(content);
 
-                })
-        
                 conn.end();
+        
+               
             
         
 
             })
 
         
-      
 
-
-
-
-       
         
-    
-
-  
 
 
 })
@@ -630,6 +624,269 @@ app.get("/itemsSold", (req, res)=>{
     conn.end()
 
     
+})
+
+
+app.get('/customerInfo', (req, res)=>{
+
+    console.log(req.query.email)
+
+    let query = `SELECT * FROM Customer WHERE email="${req.query.email}"`
+
+    let  conn = newConnection();
+
+    conn.connect((err)=>
+    {
+        if(err)
+        {
+            console.log(err)
+        }
+        else
+        {
+            console.log("Connected!")
+        }
+    })
+
+    conn.query(query, (err, rows, fields)=>{
+
+
+        if(err)
+            console.log(err)
+        
+    
+
+       let content=``;
+
+       console.log(rows);
+
+       let expDate = new Date(rows[0].expiryDate);
+       expDate=expDate.toISOString().split("T")[0]
+    
+
+       content= `<div  style='margin-bottom: 10px; margin-top:10px'>Customer Update Form: </div>`
+        content+=`      <form action="javascript:updateCustomer()" id="updateCustomerForm" >
+                                    <p>
+                                    <label for="fName"  >First Name: </label>
+                                    <input type="text" id="fName" required value=${rows[0].firstName} ></input>
+                                    </p>
+
+                                    <p>
+                                    <label for="lName"  >Last Name: </label>
+                                    <input type="text"  id="lName" required value=${rows[0].lastName} ></input>
+                                    </p>
+
+                                    <p>
+                                    <label for="phone">Home Phone: </label>
+                                    <input type=number id="phone"  value=${rows[0].homePhone} required min=0></input>
+                                    </p>
+
+
+                                    <p>
+                                    <label for="email">Email: </label>
+                                    <input type="text" id="email"  value=${rows[0].email} required disabled></input>
+                                    </p>
+
+             
+
+                                    <p>
+                                    <label for="street">Street: </label>
+                                    <input type="text" id="street"  value="${rows[0].street}" required></input>
+                                    </p>
+                                    <p>
+                                    <label for="postalCode">Postal Code: </label>
+                                    <input type="text" id="postalCode"  value=${rows[0].postalCode} required></input>
+                                    </p>
+                                    <p>
+                                    <label for="city">City: </label>
+                                    <input type="text" id="city"  value="${rows[0].city}" required></input>
+                                    </p>
+                                    <p>
+                                    <label for="state">State: </label>
+                                    <input type="text" id="state"  value="${rows[0].state}" required></input>
+                                    </p>
+                                    <p>
+                                    <label for="cardNum">Card Number :</label>
+                                    <input type=number id="cardNum"  value=${rows[0].cardNumber} min=10000000 max=99999999 required></input>
+                                    </p>
+                                    <p>
+                                    <label for="cvc">CVC: </label>
+                                    <input type=number id="cvc"  value=${rows[0]["CVC"]} required min=0  max=999></input>
+                                    </p>
+                                    <p>
+                                    <label for="cardType">Card Type: </label>
+                                    <input type="text" id="cardType"  value="${rows[0].cardType}" required></input>
+                                    </p>
+                                    <p>
+                                    <label for="expiry">Expiry: </label>
+                                    <input type="date" id="expiry"  value="${expDate}" required></input>
+                                    </p>
+
+                                    <p>
+                                    <label for="long">Longitude: </label>
+                                    <input type=number id="long"  value=${rows[0].longitude} required min=-180 max =180 step=any></input>
+                                    </p>
+
+                                    <p>
+                                    <label for="lat">Latitude: </label>
+                                    <input type=number id="lat"  value=${rows[0].latitude} required min=-90 max=90 step=any></input>
+                                    </p>
+
+                                    <p>
+                                  
+                                    <input type="submit"></input>
+                                    </p>
+
+                                   
+                                
+                                </form>
+
+`
+
+         
+      
+   
+     
+    
+       
+
+
+
+
+        res.send(content);
+
+    });
+
+    
+   
+
+    conn.end()
+
+
+})
+
+app.get('/updateCustomer', (req, res)=>{
+
+    let customerEntry =  JSON.parse(req.query.customer);
+
+    let  conn = newConnection();
+
+
+    console.log(customerEntry);
+
+   
+
+   
+    conn.connect((err)=>
+    {
+        if(err)
+        {
+            console.log(err)
+        }
+        else
+        {
+            console.log("Connected!")
+        }
+    })
+
+  
+    var sql = `START TRANSACTION;
+    UPDATE Customer 
+    SET firstName = "${customerEntry.fName}" , lastName = "${customerEntry.lName}" , homePhone=${customerEntry.phone}, email =  "${customerEntry.email}",  street = "${customerEntry.street}",  postalCode="${customerEntry.postalCode}", city = "${customerEntry.city}" , state = "${customerEntry.state}", cardNumber=${customerEntry.cardNum}, CVC=${customerEntry.cvc}, cardType="${customerEntry.cardType}", expiryDate=CAST("${customerEntry.expiry}" AS DATE), longitude = ${customerEntry.long}, latitude=${customerEntry.lat}
+    WHERE email = "andersonjeremy@hotmail.com";
+    COMMIT;
+    SELECT  * FROM Customer WHERE email = "${customerEntry.email}" `
+    conn.query(sql, (err, results, fields)=>{
+
+        if(err)
+            console.log(err)
+
+      
+       
+    
+        if(!Array.isArray(results) || !results)
+        {
+            res.send("Please Input a Valid Customer Attributes!")
+        }
+        else
+        {
+
+        let updateResult = results[results.length-1];
+
+        console.log(results)
+  
+
+
+       let content=``;
+
+      
+
+       content= `<div  style='margin-bottom: 10px'>Customer Updated: </div>`
+
+       content+=`<table cellpadding="5px" cellspacing="5px">
+       <tr>
+       <th>First Name</th>
+       <th>Last Name</th>
+       <th>Email</th>
+       <th>Home Phone</th>
+       <th>Street</th>
+       <th>Postal Code</th>
+       <th>City</th>
+       <th>State</th>
+       <th>Card Number</th>
+       <th>CVC</th>
+       <th>Card Type</th>
+       <th>Expiry</th>
+       <th>Longitude</th>
+       <th>Latitude</th>
+       
+       </tr>`
+
+     
+      
+   
+        content+=`
+                    <tr>
+                    <td>${updateResult[0].firstName}</td>
+                    <td>${updateResult[0].lastName}</td>
+                    <td>${updateResult[0].email}</td>
+                    <td>${updateResult[0].homePhone}</td>
+                    <td>${updateResult[0].street}</td>
+                    <td>${updateResult[0].postalCode}</td>
+                    <td>${updateResult[0].city}</td>
+                    <td>${updateResult[0].state}</td>
+                    <td>${updateResult[0].cardNumber}</td>
+                    <td>${updateResult[0]["CVC"]}</td>
+                    <td>${updateResult[0].cardType}</td>
+                    <td>${updateResult[0].expiryDate}</td>
+                    <td>${updateResult[0].longitude}</td>
+                    <td>${updateResult[0].latitude}</td>
+                  
+                 
+                    </tr>
+        `
+
+    
+       
+
+       content+="</table>"
+
+
+        res.send(content);
+
+        }
+
+
+     
+        
+        
+
+      
+
+    });
+
+
+    
+
 })
 
 
